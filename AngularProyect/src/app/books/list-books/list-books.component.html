@@ -1,0 +1,28 @@
+<button (click)="addBooks()">Add card +</button>
+
+<app-generic-list [listedT]="books">
+  <ng-container contentBook>
+    @for (book of books; track $index){
+      <div class="container-books">
+        <div style="display: flex; flex-direction: row; gap: 10px">
+          <div>
+            @if(book.bookImage){
+              <img [ngSrc]="book.cardImage" [priority]="$index === 0" width="169" height="250"/>
+            } @else {
+              <img src="default.jpg" width="169" height="250"/>
+            }
+          </div>
+          <div>
+            <p>{{$index}} Book: {{book.name | uppercase}}</p>
+            <p>Price: {{book.price | currency}}</p>
+            <button mat-flat-button (click)="removeBook(book)">
+              <mat-icon>delete</mat-icon>
+              Remove Card
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </ng-container>
+</app-generic-list>
+

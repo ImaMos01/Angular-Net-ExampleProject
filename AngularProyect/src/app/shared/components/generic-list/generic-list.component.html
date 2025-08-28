@@ -1,0 +1,14 @@
+@if (!listedT){
+    <div #loadingPage>
+        <ng-content select="[loadingPage]"></ng-content>
+    </div>
+    @if(loadingPage.innerHTML.trim()){
+        <h2> LOADING....</h2>
+    }
+}@else if(listedT.length === 0){
+  <div>
+    <p>No hay elementos para mostrar</p>
+  </div>
+}@else {
+    <ng-content select="[contentBook]"></ng-content>
+}
