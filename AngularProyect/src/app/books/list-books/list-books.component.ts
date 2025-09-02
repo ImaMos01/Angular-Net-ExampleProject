@@ -16,7 +16,7 @@ export class ListBooksComponent {
 
   @Input({required:true}) //añade parametros a los componentes
   books!: any[];
-
+/*
   addBooks(){
     this.books.push({
       name:"yummy",
@@ -28,4 +28,5 @@ export class ListBooksComponent {
     const index = this.books.findIndex((currentBook:any)=>currentBook.name === book.name);
     this.books.splice(index,1);
   }
+    */
 }

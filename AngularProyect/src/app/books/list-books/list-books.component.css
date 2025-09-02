@@ -1,5 +1,22 @@
 .container-books{
-    border: 1px solid black;
-    margin-bottom: 1rem;
-    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+}
+
+.container-book{
+    margin-right: 2%;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+p{
+    max-width: 225px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+button {
+    margin-left: 1rem;
 }

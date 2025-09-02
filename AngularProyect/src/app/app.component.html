@@ -1,8 +1,4 @@
 <app-menu></app-menu>
-<app-rating [maxRating]="5"></app-rating>
-<h2>Books features</h2>
-
-<app-list-books [books]="booksAvailable"></app-list-books>
-<h2>Next Books</h2>
-
-<app-list-books [books]="booksNextDebut"></app-list-books>
+<div class="containerApp">
+    <router-outlet></router-outlet>
+</div>
