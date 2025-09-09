@@ -1,1 +1,3 @@
-<button mat-flat-button type="button" (click)="saveChanges()">save changes</button>
+<h2>Create Genres</h2>
+
+<app-genres-forms (postForm)="saveChanges($event)"></app-genres-forms>
