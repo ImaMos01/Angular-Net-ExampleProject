@@ -1,2 +1,2 @@
-<h2>Authors</h2>
-<button mat-flat-button routerLink="/authors/create">Add new</button>
+<h2>Create Authors</h2>
+<app-author-form (postForm)="saveChanges($event)"></app-author-form>
