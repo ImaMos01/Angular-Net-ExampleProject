@@ -1,0 +1,14 @@
+<h4>{{title}}</h4>
+
+<div>
+    <button type="button" mat-raised-button (click)="loadFiles.click()">upload Image</button>
+    <input type="file" hidden #loadFiles accpet="image/*" (change)="convertImage($event)" />
+</div>
+
+<div>
+    @if (imageBase64){
+        <img [src]="imageBase64" width="169" height="250" />
+    }@else if(urlCurrentPhoto){
+        <img [src]="urlCurrentPhoto" width="169" height="250" />
+    }
+</div>

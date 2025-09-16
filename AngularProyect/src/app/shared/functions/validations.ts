@@ -19,3 +19,19 @@ export function upperFirstLetter(): ValidatorFn{
         return null;
     }
 }
+
+export function dateCantBeFuture():ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null =>{
+        const userDate = new Date(control.value);
+        const today = new Date();
+
+        if(userDate > today){
+            return{
+                future:{
+                    message: 'the date cant be in the future'
+                }
+            }
+        }
+        return null;
+    }
+}

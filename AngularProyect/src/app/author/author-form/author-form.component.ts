@@ -7,10 +7,12 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterLink } from '@angular/router';
 import { AuthorCreationDto, AuthorDTO } from '../author';
 import moment from 'moment';
+import { dateCantBeFuture } from '../../shared/functions/validations';
+import { InputImgComponent } from "../../shared/components/input-img/input-img.component";
 
 @Component({
   selector: 'app-author-form',
-  imports: [MatButtonModule,RouterLink,MatFormFieldModule,ReactiveFormsModule,MatInputModule, MatDatepickerModule],
+  imports: [MatButtonModule, RouterLink, MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatDatepickerModule, InputImgComponent],
   templateUrl: './author-form.component.html',
   styleUrl: './author-form.component.css'
 })
@@ -32,8 +34,38 @@ export class AuthorFormComponent  implements OnInit{
     name:['',{
       validators:[Validators.required]
     }],
-    birthDate: new FormControl<Date | null>(null)
+    birthDate: new FormControl<Date | null>(null,{
+      validators: [Validators.required, dateCantBeFuture()]
+    }),
+    photo: new FormControl<File | string | null>(null)
   })
+
+  getErrorNameField(){
+    let field = this.form.controls.name;
+
+    if(field.hasError('required')){
+      return 'The field name is required';
+    }
+    return "";
+  }
+
+  getErrorBirthDateField(){
+    let field = this.form.controls.birthDate;
+
+    if(field.hasError('required')){
+      return 'The field name is required';
+    }
+
+    if(field.hasError('future')){
+      return field.getError('future').message;
+    }
+
+    return "";
+  }
+
+  selectedFile(file:File){
+    this.form.controls.photo.setValue(file);
+  }
 
   saveChanges(){
     if(!this.form.valid){
@@ -41,6 +73,11 @@ export class AuthorFormComponent  implements OnInit{
     }
     const author = this.form.value as AuthorCreationDto;
     author.birthDate = moment(author.birthDate).toDate();
+    
+    if(typeof author.photo === "string"){
+      author.photo = undefined;
+    }
+
     this.postForm.emit(author);
   }
 }
