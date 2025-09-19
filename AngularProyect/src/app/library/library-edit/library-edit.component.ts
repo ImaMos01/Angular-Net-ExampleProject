@@ -12,7 +12,7 @@ export class LibraryEditComponent {
   @Input({transform:numberAttribute})
   id!: number;
 
-  library: LibraryDTO = {id: 1, name: 'norma'}
+  library: LibraryDTO = {id: 1, name: 'norma',latitude: -16.398999564762452,lengthC: -71.53694301128071}
 
   saveChanges(library: LibraryCreationDTO){
     console.log(library);

@@ -4,6 +4,12 @@
         <input matInput [formControl]="form.controls.name" />
         <mat-error>{{getErrorFieldName()}}</mat-error>
     </mat-form-field>
+
+    <h4>Select the library</h4>
+    <app-map-comp 
+    (selectedCoordinates)="selectedCoordinates($event)"
+    [initialCoordinates]="initialCoordinates"></app-map-comp>
+
     <div class="container-buttons">
         <button type="submit" mat-flat-button [disabled]="form.invalid">Save Changes</button>
         <a mat-stroked-button routerLink="/library">
