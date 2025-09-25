@@ -11,6 +11,7 @@ import { GenresEditComponent } from './genres/genres-edit/genres-edit.component'
 import { AuthorEditComponent } from './author/author-edit/author-edit.component';
 import { LibraryEditComponent } from './library/library-edit/library-edit.component';
 import { BookEditComponent } from './books/book-edit/book-edit.component';
+import { BookFilterComponent } from './books/book-filter/book-filter.component';
 
 export const routes: Routes = [
     {path: '',component: LandingPageComponent},
@@ -29,6 +30,8 @@ export const routes: Routes = [
 
     {path: 'book/create', component:BookAddComponent},
     {path: 'book/edit/:id', component:BookEditComponent},
+    {path: 'book/filter', component:BookFilterComponent},
+
 
     {path: '**', redirectTo:''},
 
