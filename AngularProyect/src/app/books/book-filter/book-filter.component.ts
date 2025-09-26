@@ -7,6 +7,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ListBooksComponent } from "../list-books/list-books.component";
 import { filterBook } from './filterBook';
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-book-filter',
@@ -17,9 +19,12 @@ import { filterBook } from './filterBook';
 export class BookFilterComponent implements OnInit{
   ngOnInit(): void {
     //filter the books int the input
+    this.readURLValues();
+    this.searchBooks(this.form.value as filterBook);
     this.form.valueChanges.subscribe(values =>{
       this.books = this.booksOriginal;
       this.searchBooks(values as filterBook)
+      this. searchParameterInURL(values as filterBook);
     });
   }
 
@@ -38,10 +43,58 @@ export class BookFilterComponent implements OnInit{
     }
   }
 
+  readURLValues(){
+    this.activatedRoute.queryParams.subscribe((params: any)=>{
+      let objectBook: any = {};
+
+      if(params.title){
+        objectBook.title = params.title;
+      }
+
+      if(params.genreId){
+        objectBook.genreId = Number(params.genreId);
+      }
+
+      if(params.nextPublication){
+        objectBook.nextPublication = params.nextPublication;
+      }
+
+      if(params.onLibrary){
+        objectBook.onLibrary = params.onLibrary;
+      }
+
+      this.form.patchValue(objectBook);
+    });
+  }
+
+  searchParameterInURL(values : filterBook){
+    let queryString = [];
+    if(values.title){
+      queryString.push(`title=${encodeURIComponent(values.title)}`);
+    }
+
+    if(values.genreId !== 0){
+      queryString.push(`genreId=${values.genreId}`);
+    }
+
+    if(values.nextPublication){
+      queryString.push(`nextPublication=${values.nextPublication}`);
+    }
+
+    if(values.onLibrary){
+      queryString.push(`onLibrary=${values.onLibrary}`);
+    }
+
+    this.location.replaceState('book/filter',queryString.join('&'));
+  }
+
   cleanFilter(){
     this.form.patchValue({title:'', genreId: 0, nextPublication: false, onLibrary: false});
   }
- private formBuilder = inject(FormBuilder);
+
+  private formBuilder = inject(FormBuilder);
+  private location = inject(Location);
+  private activatedRoute = inject(ActivatedRoute);
 
  form = this.formBuilder.group({
   title: '',
