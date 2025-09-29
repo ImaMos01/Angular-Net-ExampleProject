@@ -1,3 +1,8 @@
 <h2>Edit book</h2>
 
-<app-book-forms [modelBook]="book" (postForm)="saveChanges($event)"></app-book-forms>
+<app-book-forms 
+    [modelBook]="book" 
+    (postForm)="saveChanges($event)"
+    [unselectedGenres]="unselectedGenres"
+    [selectedGenres]="selectedGenres"   
+></app-book-forms>

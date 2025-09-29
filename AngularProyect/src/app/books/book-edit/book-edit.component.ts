@@ -1,6 +1,7 @@
 import { Component, Input, numberAttribute } from '@angular/core';
 import { BookDTO, BookCreationDTO} from '../books';
 import { BookFormsComponent } from "../book-forms/book-forms.component";
+import { MultipleSelectorDto } from '../../shared/components/multiple-selector/MultipleSelectorModel';
 
 @Component({
   selector: 'app-book-edit',
@@ -9,8 +10,16 @@ import { BookFormsComponent } from "../book-forms/book-forms.component";
   styleUrl: './book-edit.component.css'
 })
 export class BookEditComponent {
+  
   @Input({transform: numberAttribute})
   id!:number;
+
+  selectedGenres: MultipleSelectorDto[] = [{key: 2, value: 'drama'}];
+
+  unselectedGenres: MultipleSelectorDto[] = [
+    {key: 1, value: 'sci'},
+    {key: 3, value: 'action'}
+  ];
 
   book: BookDTO = {
     id:1, title:'a', review: '', releaseDate: new Date('2018-07-25'), cover:''

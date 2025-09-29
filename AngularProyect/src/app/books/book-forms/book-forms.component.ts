@@ -8,10 +8,12 @@ import { RouterLink } from '@angular/router';
 import { InputImgComponent } from '../../shared/components/input-img/input-img.component';
 import { BookDTO, BookCreationDTO } from '../books';
 import moment from 'moment';
+import { MultipleSelectorDto } from '../../shared/components/multiple-selector/MultipleSelectorModel';
+import { MultipleSelectorComponent } from "../../shared/components/multiple-selector/multiple-selector.component";
 
 @Component({
   selector: 'app-book-forms',
-  imports: [MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink, MatDatepickerModule, InputImgComponent],
+  imports: [MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink, MatDatepickerModule, InputImgComponent, MultipleSelectorComponent],
   templateUrl: './book-forms.component.html',
   styleUrl: './book-forms.component.css'
 })
@@ -22,6 +24,13 @@ export class BookFormsComponent implements OnInit {
     }
   }
 
+  @Input({required:true})
+  unselectedGenres!: MultipleSelectorDto[];
+  
+  @Input({required:true})
+  selectedGenres!: MultipleSelectorDto[];
+
+  
   @Input()
     modelBook?: BookDTO;
   
@@ -47,6 +56,8 @@ export class BookFormsComponent implements OnInit {
     const book = this.form.value as BookCreationDTO;
 
     book.releaseDate = moment(book.releaseDate).toDate();
+
+    book.genresId = this.selectedGenres.map(val => val.key);
 
     this.postForm.emit(book);
   }

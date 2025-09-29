@@ -11,4 +11,5 @@ export interface BookCreationDTO{
     releaseDate: Date;
     review: string;
     cover?: string;
+    genresId?: number[];
 }
