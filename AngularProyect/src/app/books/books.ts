@@ -12,4 +12,5 @@ export interface BookCreationDTO{
     review: string;
     cover?: string;
     genresId?: number[];
+    libraryId?: number[];
 }

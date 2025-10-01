@@ -10,10 +10,11 @@ import { BookDTO, BookCreationDTO } from '../books';
 import moment from 'moment';
 import { MultipleSelectorDto } from '../../shared/components/multiple-selector/MultipleSelectorModel';
 import { MultipleSelectorComponent } from "../../shared/components/multiple-selector/multiple-selector.component";
+import { AuthorAutocompleteComponent } from "../../author/author-autocomplete/author-autocomplete.component";
 
 @Component({
   selector: 'app-book-forms',
-  imports: [MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink, MatDatepickerModule, InputImgComponent, MultipleSelectorComponent],
+  imports: [MatFormFieldModule, ReactiveFormsModule, MatInputModule, MatButtonModule, RouterLink, MatDatepickerModule, InputImgComponent, MultipleSelectorComponent, AuthorAutocompleteComponent],
   templateUrl: './book-forms.component.html',
   styleUrl: './book-forms.component.css'
 })
@@ -30,7 +31,12 @@ export class BookFormsComponent implements OnInit {
   @Input({required:true})
   selectedGenres!: MultipleSelectorDto[];
 
+  @Input({required:true})
+  unselectedLibrary!: MultipleSelectorDto[];
   
+  @Input({required:true})
+  selectedLibrary!: MultipleSelectorDto[];
+
   @Input()
     modelBook?: BookDTO;
   
@@ -58,6 +64,7 @@ export class BookFormsComponent implements OnInit {
     book.releaseDate = moment(book.releaseDate).toDate();
 
     book.genresId = this.selectedGenres.map(val => val.key);
+    book.libraryId = this.selectedLibrary.map(val => val.key);
 
     this.postForm.emit(book);
   }

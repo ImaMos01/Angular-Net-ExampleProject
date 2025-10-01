@@ -18,6 +18,13 @@ export class BookAddComponent {
     {key: 3, value: 'action'}
   ];
 
+  selectedLibrary: MultipleSelectorDto[] = [];
+
+  unselectedLibrary: MultipleSelectorDto[] = [
+    {key: 1, value: 'A'},
+    {key: 2, value: 'B'},
+    {key: 3, value: 'C'}
+  ];
 
   saveChanges(books: BookCreationDTO){
   }

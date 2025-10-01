@@ -24,6 +24,12 @@
     <h4>Select genres</h4>
     <app-multiple-selector [SelectedItems]="selectedGenres" [NotSelectedItems]="unselectedGenres"></app-multiple-selector>
 
+    <h4>Select Librarys</h4>
+    <app-multiple-selector [SelectedItems]="selectedLibrary" [NotSelectedItems]="unselectedLibrary"></app-multiple-selector>
+
+    <h4>Select Authors</h4>
+    <app-author-autocomplete></app-author-autocomplete>
+    
     <div class="container-buttons">
         <button type="submit" mat-flat-button [disabled]="form.invalid">save</button>
         <a mat-stroked-button routerLink="/">Cancel</a>

@@ -21,6 +21,16 @@ export class BookEditComponent {
     {key: 3, value: 'action'}
   ];
 
+  selectedLibrary: MultipleSelectorDto[] = [
+    {key: 2, value: 'B'}
+  ];
+
+  unselectedLibrary: MultipleSelectorDto[] = [
+    {key: 1, value: 'A'},
+    {key: 3, value: 'C'}
+  ];
+
+
   book: BookDTO = {
     id:1, title:'a', review: '', releaseDate: new Date('2018-07-25'), cover:''
   }

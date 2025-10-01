@@ -10,3 +10,10 @@ export interface AuthorCreationDto{
     birthDate: Date;
     photo?: File;
 }
+
+export interface authorAutoCompleteDTO{
+    id: number;
+    name: string;
+    nickname: string;
+    photo: string;
+}
