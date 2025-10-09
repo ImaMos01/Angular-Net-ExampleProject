@@ -13,7 +13,7 @@
 </form>
 
 @if (selectedAuthors.length > 0) {
-    <table mat-table [dataSource]="selectedAuthors" class="mat-elevation-z8">
+    <table mat-table [dataSource]="selectedAuthors" class="mat-elevation-z8" cdkDropList [cdkDropListData]="selectedAuthors" (cdkDropListDropped)="endDragItem($event)">
         <ng-container matColumnDef="image">
             <td mat-cell *matCellDef="let author">
                 <img style="width:50px" [src]="author.photo" />
@@ -43,6 +43,6 @@
             </td>
         </ng-container>
 
-        <tr mat-row *matRowDef="let row; columns: showColumn"></tr>
+        <tr mat-row *matRowDef="let row; columns: showColumn" cdkDrag [cdkDragData]="row"></tr>
     </table>
 }

@@ -1,3 +1,5 @@
+import { authorAutoCompleteDTO } from "../author/author";
+
 export interface BookDTO{
     id:number;
     title: string;
@@ -13,4 +15,5 @@ export interface BookCreationDTO{
     cover?: string;
     genresId?: number[];
     libraryId?: number[];
+    authors?: authorAutoCompleteDTO[];
 }

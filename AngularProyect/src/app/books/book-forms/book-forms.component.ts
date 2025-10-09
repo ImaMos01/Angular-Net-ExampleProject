@@ -11,6 +11,7 @@ import moment from 'moment';
 import { MultipleSelectorDto } from '../../shared/components/multiple-selector/MultipleSelectorModel';
 import { MultipleSelectorComponent } from "../../shared/components/multiple-selector/multiple-selector.component";
 import { AuthorAutocompleteComponent } from "../../author/author-autocomplete/author-autocomplete.component";
+import { authorAutoCompleteDTO } from '../../author/author';
 
 @Component({
   selector: 'app-book-forms',
@@ -38,7 +39,10 @@ export class BookFormsComponent implements OnInit {
   selectedLibrary!: MultipleSelectorDto[];
 
   @Input()
-    modelBook?: BookDTO;
+  modelBook?: BookDTO;
+
+  @Input()
+  selectedAuthors!: authorAutoCompleteDTO[];
   
   @Output()
   postForm = new EventEmitter<BookCreationDTO>();
@@ -65,6 +69,8 @@ export class BookFormsComponent implements OnInit {
 
     book.genresId = this.selectedGenres.map(val => val.key);
     book.libraryId = this.selectedLibrary.map(val => val.key);
+
+    book.authors = this.selectedAuthors;
 
     this.postForm.emit(book);
   }

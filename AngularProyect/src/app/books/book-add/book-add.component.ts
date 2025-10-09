@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { BookCreationDTO } from '../books';
 import { BookFormsComponent } from "../book-forms/book-forms.component";
 import { MultipleSelectorDto } from '../../shared/components/multiple-selector/MultipleSelectorModel';
+import { authorAutoCompleteDTO } from '../../author/author';
 
 @Component({
   selector: 'app-book-add',
@@ -26,6 +27,7 @@ export class BookAddComponent {
     {key: 3, value: 'C'}
   ];
 
+  selectedAuthors: authorAutoCompleteDTO[]=[];
   saveChanges(books: BookCreationDTO){
   }
 }
