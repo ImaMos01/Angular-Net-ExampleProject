@@ -1,1 +1,10 @@
-<p>book-add works!</p>
+<h2>Add Book</h2>
+
+<app-book-forms 
+    (postForm)="saveChanges($event)"
+    [selectedGenres]="selectedGenres"
+    [unselectedGenres]="unselectedGenres"
+    [selectedLibrary]="selectedLibrary"
+    [unselectedLibrary]="unselectedLibrary"
+    [selectedAuthors]="selectedAuthors"
+></app-book-forms>
