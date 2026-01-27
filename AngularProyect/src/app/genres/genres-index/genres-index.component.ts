@@ -1,6 +1,7 @@
-import { Component, Input, numberAttribute } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterLink } from '@angular/router';
+import { GenresService } from '../genres.service';
 
 @Component({
   selector: 'app-genres-index',
@@ -9,6 +10,11 @@ import { RouterLink } from '@angular/router';
   styleUrl: './genres-index.component.css'
 })
 export class GenresIndexComponent {
-  @Input({transform: numberAttribute})
-  id!:number;
+  genresService = inject(GenresService)
+
+  constructor(){
+    this.genresService.getAll().subscribe(genres =>{
+      console.log(genres);
+    });
+  }
 }

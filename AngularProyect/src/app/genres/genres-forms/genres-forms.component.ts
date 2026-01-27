@@ -36,8 +36,8 @@ export class GenresFormsComponent implements OnInit {
 
       if(name.hasError('required')){
         return "the name field is required";
-      } else if(name.hasError('required')){
-        return "the name field must not have more than 50 characters";
+      } else if(name.hasError('maxlength')){
+        return `the name field must not have more than ${name.getError('maxlength').requiredLength} characters`;
       }else if(name.hasError('upperFirstLetter')){
         return name.getError('upperFirstLetter').getError;
       }

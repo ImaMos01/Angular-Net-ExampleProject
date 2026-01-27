@@ -9,12 +9,30 @@ namespace NetAPI.Controllers
     [ApiController]
     public class GenresController: ControllerBase
     {
-        [HttpGet]
-        [OutputCache]
-        public List<Genre> Get()
+        private readonly IOutputCacheStore _outputCacheStore;
+        private const string _cacheTag = "genres";
+        private readonly ApplicationDbContext _context;
+
+        public GenresController(IOutputCacheStore outputCacheStore, ApplicationDbContext context)
         {
-            List<Genre> repository = new();
-            return repository;
+            this._outputCacheStore = outputCacheStore;
+            this._context = context;
+        }
+
+        [HttpGet("{id:int}",Name="getGenreById")]
+        [OutputCache(Tags = [_cacheTag])]
+        public async Task<ActionResult<Genre>> Get(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Genre genre)
+        {
+            _context.Add(genre);
+            await _context.SaveChangesAsync();
+            return CreatedAtRoute("getGenreById", new { id = genre.Id }, genre);
         }
     }
 }
