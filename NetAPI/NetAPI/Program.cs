@@ -9,6 +9,8 @@ builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 
+builder.Services.AddAutoMapper(typeof(Program));
+
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer("name=DefaultConnection"));
 
 builder.Services.AddOutputCache(options =>
@@ -22,7 +24,8 @@ builder.Services.AddCors(options =>
 {
     options.AddDefaultPolicy( optionsCORS => 
     {
-        optionsCORS.WithOrigins(allowedOrigins).AllowAnyMethod().AllowAnyHeader();
+        optionsCORS.WithOrigins(allowedOrigins).AllowAnyMethod().AllowAnyHeader()
+        .WithExposedHeaders("amount-total-registers");
     });
 });
 
