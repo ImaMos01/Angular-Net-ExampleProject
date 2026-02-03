@@ -1,3 +1,39 @@
 <h2>Genres</h2>
 
 <button mat-flat-button routerLink="/genre/create">Add New</button>
+
+<app-generic-list [listedT]="genres">
+    <ng-container content>
+        <table mat-table [dataSource]="genres" class="mat-elevation-z8 index-elements">
+            <ng-container matColumnDef="id">
+                <th mat-header-cell *matHeaderCellDef>Id</th>
+                <th mat-cell *matCellDef="let element">{{element.id}}</th>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre">
+                <th mat-header-cell *matHeaderCellDef>Nombre</th>
+                <th mat-cell *matCellDef="let element">{{element.name}}</th>
+            </ng-container>
+
+            <ng-container matColumnDef="actions">
+                <th mat-header-cell *matHeaderCellDef>Actions</th>
+                <th mat-cell *matCellDef="let element">
+                    <a routerLink="/genres/edit/{{element.id}}" mat-flat-button>Edit</a>
+                    <button mat-flat-button="warn">Delete</button>
+                </th>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="showColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: showColumns"></tr>
+        </table>
+
+        <mat-paginator 
+            showFirstLastButtons 
+            [length]="amountTotalRecords" 
+            [pageSize]="pagination.recordsPerPage" 
+            [pageSizeOptions]="[5,10,50]" 
+            class="mat-elevation-z8" 
+            (page)="updatePagination($event)">
+        </mat-paginator>
+    </ng-container>
+</app-generic-list>
