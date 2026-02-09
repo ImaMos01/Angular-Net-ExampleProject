@@ -8,11 +8,12 @@ import { MatTableModule } from '@angular/material/table';
 import { HttpResponse } from '@angular/common/http';
 import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { PaginationDTO } from '../../shared/models/PaginationDto';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 
 @Component({
   selector: 'app-genres-index',
-  imports: [RouterLink, MatButtonModule, GenericListComponent, MatTableModule, MatPaginatorModule],
+  imports: [RouterLink, MatButtonModule, GenericListComponent, MatTableModule, MatPaginatorModule, SweetAlert2Module],
   templateUrl: './genres-index.component.html',
   styleUrl: './genres-index.component.css'
 })
@@ -38,5 +39,13 @@ export class GenresIndexComponent {
   updatePagination(data: PageEvent){
     this.pagination = {page: data.pageIndex + 1, recordsPerPage: data.pageSize};
     this.loadRecords()
+  }
+
+  delete(id: number){
+    this.genresService.delete(id)
+    .subscribe(()=>{
+      this.pagination = { page: 1, recordsPerPage: 5};
+      this.loadRecords();
+    })
   }
 }

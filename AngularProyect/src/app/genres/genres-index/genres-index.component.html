@@ -19,7 +19,10 @@
                 <th mat-header-cell *matHeaderCellDef>Actions</th>
                 <th mat-cell *matCellDef="let element">
                     <a routerLink="/genres/edit/{{element.id}}" mat-flat-button>Edit</a>
-                    <button mat-flat-button="warn">Delete</button>
+                    <button mat-flat-button="warn"
+                    [swal]="{title: 'Confirmation', text: 'Do you want to delete this record?', showCancelButton: true}"
+                    (confirm)="delete(element.id)" 
+                    >Delete</button>
                 </th>
             </ng-container>
 
@@ -30,6 +33,7 @@
         <mat-paginator 
             showFirstLastButtons 
             [length]="amountTotalRecords" 
+            [pageIndex]="pagination.page-1"
             [pageSize]="pagination.recordsPerPage" 
             [pageSizeOptions]="[5,10,50]" 
             class="mat-elevation-z8" 

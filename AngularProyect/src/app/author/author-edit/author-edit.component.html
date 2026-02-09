@@ -1,2 +1,7 @@
 <p>Edit authors</p>
-<app-author-form (postForm)="saveChanges($event)" [model]="author"></app-author-form>
+@if(author){
+    <app-show-erros [errors]="errors"></app-show-erros>
+    <app-author-form (postForm)="saveChanges($event)" [model]="author"></app-author-form>
+} @else {
+    <app-loading></app-loading>
+}
