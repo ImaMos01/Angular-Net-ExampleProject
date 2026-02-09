@@ -1,5 +1,6 @@
 using NetAPI;
 using Microsoft.EntityFrameworkCore;
+using NetAPI.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -29,6 +30,9 @@ builder.Services.AddCors(options =>
     });
 });
 
+builder.Services.AddTransient<IFileStorage, FileStorageLocal>();
+builder.Services.AddHttpContextAccessor();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -37,6 +41,8 @@ app.MapOpenApi();
 
 
 app.UseHttpsRedirection();
+
+app.UseStaticFiles();
 
 app.UseCors();
 

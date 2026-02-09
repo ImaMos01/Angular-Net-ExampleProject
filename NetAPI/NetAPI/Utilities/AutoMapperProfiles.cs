@@ -9,8 +9,15 @@ namespace NetAPI.Utilities
         public AutoMapperProfiles()
         {
             ConfigGenreMapping();
+            configAuthorMapping();
         }
 
+        private void configAuthorMapping()
+        {
+            CreateMap<CreationAuthorDTO, Author>()
+                .ForMember(x => x.Photo, options => options.Ignore());
+            CreateMap<Author,AuthorDTO>();
+        }
         private void ConfigGenreMapping()
         {
             CreateMap<CreationGenreDTO, Genre>();

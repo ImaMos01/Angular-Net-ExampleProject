@@ -10,5 +10,6 @@ namespace NetAPI
 
         }
         public DbSet<Genre> Genres {get; set;}
+        public DbSet<Author> Authors {get; set;}
     }
 }
