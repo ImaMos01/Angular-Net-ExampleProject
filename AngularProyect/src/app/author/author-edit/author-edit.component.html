@@ -1,2 +1,2 @@
 <p>Edit authors</p>
-<app-author-form (postForm)="saveChanges($event)" [model]="author"></app-author-form>
+<app-entity-edit [formulary]="authorsForm" [id]="id" pathIndex="/authors" title="Edit author"></app-entity-edit>
