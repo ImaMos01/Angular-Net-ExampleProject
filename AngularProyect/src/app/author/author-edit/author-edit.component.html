@@ -1,7 +1,2 @@
 <p>Edit authors</p>
-@if(author){
-    <app-show-erros [errors]="errors"></app-show-erros>
-    <app-author-form (postForm)="saveChanges($event)" [model]="author"></app-author-form>
-} @else {
-    <app-loading></app-loading>
-}
+<app-entity-edit [formulary]="authorsForm" [id]="id" pathIndex="/authors" title="Edit author"></app-entity-edit>

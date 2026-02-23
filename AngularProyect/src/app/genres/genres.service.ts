@@ -5,12 +5,13 @@ import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { PaginationDTO } from '../shared/models/PaginationDto';
 import { buildQueryParams } from '../shared/functions/buildQueryParams';
+import { IServiceCRUD } from '../shared/interfaces/IServiceCRUD';
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class GenresService {
+export class GenresService implements IServiceCRUD<genreDTO, genresCreationDTO> {
 
   private http = inject(HttpClient);
   private urlBase = environment.apiURL + '/genres';

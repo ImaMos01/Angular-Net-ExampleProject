@@ -6,37 +6,24 @@ import { Router } from '@angular/router';
 import { errorExtract } from '../../shared/functions/errorExtract';
 import { ShowErrosComponent } from "../../shared/components/show-erros/show-erros.component";
 import { LoadingComponent } from "../../shared/components/loading/loading.component";
+import { SERVICE_CRUD_TOKEN } from '../../shared/supplier/supplier';
+import { EntityEditComponent } from "../../shared/components/entity-edit/entity-edit.component";
 
 @Component({
   selector: 'app-author-edit',
   standalone: true,
-  imports: [AuthorFormComponent, ShowErrosComponent, LoadingComponent],
+  imports: [AuthorFormComponent, ShowErrosComponent, LoadingComponent, EntityEditComponent],
   templateUrl: './author-edit.component.html',
-  styleUrl: './author-edit.component.css'
+  styleUrl: './author-edit.component.css',
+  providers: [
+      {provide: SERVICE_CRUD_TOKEN, useClass: AuthorService}
+    ]
 })
 export class AuthorEditComponent {
-  ngOnInit(): void{
-    this.authorsService.getById(this.id).subscribe(author =>{
-      this.author = author;
-    })
-  }
 
   @Input({transform: numberAttribute})
   id!:number;
-  author?:AuthorDTO; 
-  authorsService = inject(AuthorService);
-  router = inject(Router);
-  errors: string[] = []
+  
+  authorsForm = AuthorFormComponent;
 
-  saveChanges(author:AuthorCreationDto){
-    this.authorsService.update(this.id,author).subscribe({
-      next:() => {
-        this.router.navigate(['/authors']);
-      },
-      error: err =>{
-        const errors = errorExtract(err);
-        this.errors = errors;
-      }
-    })
-  }
 }

@@ -5,11 +5,12 @@ import { AuthorCreationDto, AuthorDTO } from './author';
 import { PaginationDTO } from '../shared/models/PaginationDto';
 import { buildQueryParams } from '../shared/functions/buildQueryParams';
 import { Observable } from 'rxjs';
+import { IServiceCRUD } from '../shared/interfaces/IServiceCRUD';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthorService {
+export class AuthorService implements IServiceCRUD<AuthorDTO, AuthorCreationDto> {
 
   constructor() { }
 
